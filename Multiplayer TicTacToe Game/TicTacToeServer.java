@@ -99,13 +99,15 @@ class Game
         {
             this.socket = socket;
             this.mark = mark;
-            try {
-                input = new BufferedReader(
-                    new InputStreamReader(socket.getInputStream()));
-                output = new PrintWriter(socket.getOutputStream(), true);
-                output.println("WELCOME " + mark);
-                output.println("MESSAGE Waiting for opponent to connect");
-            } catch (IOException e) {
+            try 
+            {
+                this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                this.output = new PrintWriter(socket.getOutputStream(), true);
+                this.output.println("WELCOME " + mark);
+                this.output.println("MESSAGE Waiting for opponent to connect");
+            } 
+            catch (IOException e) 
+            {
                 System.out.println("Player died: " + e);
             }
         }
@@ -120,13 +122,13 @@ class Game
         public void OtherPlayerMoved(int location) 
         {
             output.println("OPPONENT_MOVED " + location);
-            output.println(
-                this.IsWinnerDecided() ? "DEFEAT" : this.IsBoardFilledUp() ? 
-                "TIE" : "");
+            output.println(this.IsWinnerDecided() ? "DEFEAT" : this.IsBoardFilledUp() ? "TIE" : "");
         }
     
-        public void Run() {
-            try {
+        public void Run() 
+        {
+            try 
+            {
                 // The thread is only started after everyone connects.
                 output.println("MESSAGE All players connected");
 
@@ -146,9 +148,7 @@ class Game
                         if (this.IsLegalMove(location, this)) 
                         {
                             output.println("VALID_MOVE");
-                            output.println(this.IsWinnerDecided() ? "VICTORY"
-                                         : this.IsBoardFilledUp() ? "TIE"
-                                         : "");
+                            output.println(this.IsWinnerDecided() ? "VICTORY" : this.IsBoardFilledUp() ? "TIE" : "");
                         } 
                         else 
                         {
