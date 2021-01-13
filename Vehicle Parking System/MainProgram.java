@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 public class MainProgram
 {
-    int choice = 0;
-    int vehicleCounter = 0; 
-    int carNumber; 
-    int carSlot;
+	int choice = 0;
+	int vehicleCounter = 0; 
+	int carNumber; 
+	int carSlot;
 	String carColor;
 	String carType;
-		
+
 	public static void main(String[] args) 
 	{
 		Parking newParking = new Parking();
