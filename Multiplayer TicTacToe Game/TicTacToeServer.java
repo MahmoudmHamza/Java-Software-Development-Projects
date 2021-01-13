@@ -4,40 +4,52 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-public class TicTacToeServer {
 
-    public static void main(String[] args) throws Exception {
+// This class handles the game's server logic
+public class TicTacToeServer 
+{
+    public static void main(String[] args) throws Exception 
+    {
         ServerSocket listener = new ServerSocket(8901);
         System.out.println("Tic Tac Toe Server is Running");
+        
         try {
-            while (true) {
+            while (true) 
+            {
                 Game game = new Game();
                 Game.Player playerX = game.new Player(listener.accept(), 'X');
                 Game.Player playerO = game.new Player(listener.accept(), 'O');
-                playerX.setOpponent(playerO);
-                playerO.setOpponent(playerX);
+                playerX.SetOpponent(playerO);
+                playerO.SetOpponent(playerX);
                 game.currentPlayer = playerX;
                 playerX.start();
                 playerO.start();
             }
-        } finally {
+        } 
+        finally 
+        {
             listener.close();
         }
     }
 }
 
-class Game {
-    // a board of 9 squares
-    private Player[] board = {
+// This class constructs game play's logic
+class Game 
+{
+    // Tic Tac Toe's board consists of 9 squares
+    private Player[] board = 
+    {
         null, null, null,
         null, null, null,
-        null, null, null};
+        null, null, null
+    };
 
-    //current player
+    // Indicates the current player
     Player currentPlayer;
 
-    // winner
-    public boolean hasWinner() {
+    // Determines whether we have a winner or not
+    public boolean IsWinnerDecided() 
+    {
         return
             (board[0] != null && board[0] == board[1] && board[0] == board[2])
           ||(board[3] != null && board[3] == board[4] && board[3] == board[5])
@@ -50,32 +62,41 @@ class Game {
     }
 
     // no empty squares
-    public boolean boardFilledUp() {
-        for (int i = 0; i < board.length; i++) {
+    public boolean IsBoardFilledUp() 
+    {
+        for (int i = 0; i < board.length; i++) 
+        {
             if (board[i] == null) {
                 return false;
             }
         }
         return true;
     }
+    
     // thread when player tries a move
-    public synchronized boolean legalMove(int location, Player player) {
-        if (player == currentPlayer && board[location] == null) {
-            board[location] = currentPlayer;
-            currentPlayer = currentPlayer.opponent;
-            currentPlayer.otherPlayerMoved(location);
+    public synchronized boolean IsLegalMove(int location, Player player) 
+    {
+        if (player == this.currentPlayer && board[location] == null) {
+            board[location] = this.currentPlayer;
+            this.currentPlayer = this.currentPlayer.opponent;
+            this.currentPlayer.OtherPlayerMoved(location);
             return true;
         }
         return false;
     }
-    class Player extends Thread {
+    
+    // This class handles player's logic
+    class Player extends Thread 
+    {
         char mark;
         Player opponent;
         Socket socket;
         BufferedReader input;
         PrintWriter output;
+        
         // thread handler to initialize stream fields
-        public Player(Socket socket, char mark) {
+        public Player(Socket socket, char mark) 
+        {
             this.socket = socket;
             this.mark = mark;
             try {
@@ -88,50 +109,72 @@ class Game {
                 System.out.println("Player died: " + e);
             }
         }
+        
         //Accepts notification of who the opponent is.
-        public void setOpponent(Player opponent) {
+        public void SetOpponent(Player opponent) 
+        {
             this.opponent = opponent;
         }
 
-        
          //Handles the otherPlayerMoved message. 
-        public void otherPlayerMoved(int location) {
+        public void OtherPlayerMoved(int location) 
+        {
             output.println("OPPONENT_MOVED " + location);
             output.println(
-                hasWinner() ? "DEFEAT" : boardFilledUp() ? "TIE" : "");
+                this.IsWinnerDecided() ? "DEFEAT" : this.IsBoardFilledUp() ? 
+                "TIE" : "");
         }
     
-        public void run() {
+        public void Run() {
             try {
                 // The thread is only started after everyone connects.
                 output.println("MESSAGE All players connected");
 
                 // Tell the first player that it is his/her turn.
-                if (mark == 'X') {
+                if (mark == 'X') 
+                {
                     output.println("MESSAGE Your move");
                 }
 
                 // Repeatedly get commands from the client and process them.
-                while (true) {
+                while (true) 
+                {
                     String command = input.readLine();
-                    if (command.startsWith("MOVE")) {
+                    if (command.startsWith("MOVE")) 
+                    {
                         int location = Integer.parseInt(command.substring(5));
-                        if (legalMove(location, this)) {
+                        if (this.IsLegalMove(location, this)) 
+                        {
                             output.println("VALID_MOVE");
-                            output.println(hasWinner() ? "VICTORY"
-                                         : boardFilledUp() ? "TIE"
+                            output.println(this.IsWinnerDecided() ? "VICTORY"
+                                         : this.IsBoardFilledUp() ? "TIE"
                                          : "");
-                        } else {
+                        } 
+                        else 
+                        {
                             output.println("MESSAGE ?");
                         }
-                    } else if (command.startsWith("QUIT")) {
+                    } 
+                    else if (command.startsWith("QUIT")) 
+                    {
                         return;
                     }
                 }
-            } catch (IOException e) {
+            } 
+            catch (IOException e) 
+            {
                 System.out.println("Player died: " + e);
-            } finally {
-                try {socket.close();} catch (IOException e) {}
+            } 
+            finally 
+            {
+                try 
+                {
+                    this.socket.close();
+                } 
+                catch (IOException e) 
+                {
+                    
+                }
             }
         }
     }
