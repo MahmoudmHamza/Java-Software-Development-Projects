@@ -28,7 +28,7 @@ public class Parking
 		}
 		else 
 		{
-            if(vehicle.getCarType() == "compact" && this.compactSlots > 0) 
+            		if(vehicle.getCarType() == "compact" && this.compactSlots > 0) 
 			{
 			    this.RegisterVehicle(vehicle, 0, false);
 			}
@@ -42,16 +42,16 @@ public class Parking
 	// Registers new vehicle into the parking
 	private void RegisterVehicle(Vehicle vehicle, int counterStart, bool isRegular)
 	{
-	    for(int i = counterStart; i < 16; i++) 
+	    	for(int i = counterStart; i < 16; i++) 
 		{
-		    if(this.parkedCars.containsKey(i+1)) 
-            {
-                continue;
-            }
-            else 
-            {
-			    vehicle.SetSlot(i+1);
-                this.CreateNewTicket(vehicle);
+			if(this.parkedCars.containsKey(i+1)) 
+		    	{
+				continue;
+		    	}
+		    	else 
+		    	{
+			    	vehicle.SetSlot(i+1);
+                		this.CreateNewTicket(vehicle);
 				this.parkedCars.put(i+1, vehicle);
 				
 				if(isRegular)
@@ -67,14 +67,14 @@ public class Parking
 				
 				--this.totalSlots;
 				i = 16;
-			}			
+			}	
 		}
 	}
 	
 	// Creates new ticket for the coming vehicle
 	private void CreateNewTicket(Vehicle vehicle)
 	{
-	    Ticket newTicket = new Ticket(vehicle);
+	    	Ticket newTicket = new Ticket(vehicle);
 		this.tickets.add(newTicket);
 		this.PrintTicket(newTicket);
 	}
