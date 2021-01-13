@@ -37,7 +37,7 @@ public class MainProgram
 			{
 				if(this.choice == 1) 
 				{
-                    this.HandleUserInput(input);
+                    			this.HandleUserInput(input);
 					
 					newCar = new Vehicle(this.carType, this.carNumber, this.carColor);
 					vehicles.add(newCar);
@@ -66,7 +66,7 @@ public class MainProgram
 	// Handles user input for parking registeration
 	private void HandleUserInput(Scanner input)
 	{
-	    System.out.print("Please enter the type of your car(compact or regular): ");
+	    	System.out.print("Please enter the type of your car(compact or regular): ");
 		this.carType = input.next();
 		System.out.print("\n");
 					
