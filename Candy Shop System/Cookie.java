@@ -1,32 +1,31 @@
 package DessertStaff;
 
-public class Cookie extends DessertItem {
-	
+// This class handles Cookie's properties
+public class Cookie extends DessertItem 
+{
 	private int number;
-	private int ppd;
+	private int percentage;
 	
-	public Cookie(String name, int number, int ppd) {
-		
+	public Cookie(String name, int number, int percentage) 
+	{
 		super(name);
 		this.number = number;
-		this.ppd = ppd;
+		this.percentage = percentage;
 	}
 	
-	public int getNumber() {
-		
-		return number;
+	public int GetNumber() 
+	{
+		return this.number;
 	}
 	
-	public int getPpd() {
-		
-		return ppd;
+	public int GetPercentage() 
+	{
+		return this.percentage;
 	}
 	
-	public int getCost() {
-		
-		double price = ppd * ((double)number / 12);
-		
+	public int GetCost() 
+	{
+		double price = this.percentage * ((double)this.number / 12);
 		return (int)Math.round(price);
 	}
-
 }

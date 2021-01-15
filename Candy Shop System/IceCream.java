@@ -1,18 +1,17 @@
 package DessertStaff;
 
-public class IceCream extends DessertItem {
-	
+public class IceCream extends DessertItem 
+{
 	private int cost;
 	
-	public IceCream(String name, int cost) {
-		
+	public IceCream(String name, int cost) 
+	{
 		super(name);
 		this.cost = cost;
 	}
 	
-	public int getCost() {
-		
-		return cost;
+	public int GetCost() 
+	{
+		return this.cost;
 	}
-
 }

@@ -1,32 +1,31 @@
 package DessertStaff;
 
-public class Candy extends DessertItem {
-	
+// This class holds Candy's properties
+public class Candy extends DessertItem 
+{
 	private double weight;
-	private double ppp;
+	private double percentage;
 	
-	public Candy(String name, double weight,double ppp) {
-		
+	public Candy(String name, double weight, double percentage) 
+	{
 		super(name);
 		this.weight = weight;
-		this.ppp = ppp;
+		this.percentage = percentage;
 	}
 	
-	public double getWeight() {
-		
-		return weight;
+	public double GetWeight() 
+	{
+		return this.weight;
 	}
 	
-	public int getPpp() {
-		
-		return (int)Math.round(ppp);
+	public int GetPercentage() 
+	{
+		return (int)Math.round(this.percentage);
 	}
 	
-	public int getCost() {
-		
-		double price = weight * ppp ;
-		
+	public int GetCost()
+	{
+		double price = this.weight * this.percentage;
 		return (int)Math.round(price);
 	}
-
 }
