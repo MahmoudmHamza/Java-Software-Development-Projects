@@ -69,7 +69,7 @@ public class Checkout
 				temp = String.format("%.2f lbs. @ %s /lb.\n%-30s%s\n", ((Candy)this.dessertList.get(i)).GetWeight(), 
 						DessertShoppe.cents2dollarsAndCents(((Candy)this.dessertList.get(i)).GetPercentage()), 
 						this.dessertList.get(i).GetName(),
-						DessertShoppe.cents2dollarsAndCents(dessertList.get(i).GetCost()));
+						DessertShoppe.cents2dollarsAndCents(this.dessertList.get(i).GetCost()));
 			}
 			else 
 			{
