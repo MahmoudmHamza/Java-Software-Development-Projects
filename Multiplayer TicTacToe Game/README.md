@@ -1,6 +1,6 @@
 >**Brief**
 
-Tic Tac Toe is multiplayer game for two players, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a diagonal, horizontal, or vertical row is the winner. This project respresents a client server model which depends mainly on message transmission between clients and server. Each move made by a player will be sent in a message to the server to be processed. After that the server will return the result as response to both clients based on the sent message.
+Tic Tac Toe is multiplayer game for two players, X and O, who take turns marking the spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a diagonal, horizontal, or vertical row is the winner. This project represents a client server model which depends mainly on message transmission between clients and server. Each move made by a player will be sent in a message to the server to be processed. After that the server will return the result as response to both clients based on the sent message.
 
 >**Project Concept**
 
