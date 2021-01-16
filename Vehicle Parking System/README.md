@@ -2,7 +2,7 @@
 
 Vehicle parking system is a console-based application that deals with vehicles, tickets and parking slots that controls how the car parking works. It's written in Java and applies OOP (Object-Oriented Programming) Concepts.
 
->**Project Concept**
+>**Overview**
 
 When the program starts, the user has 2 options:
 
